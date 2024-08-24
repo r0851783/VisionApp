@@ -30,6 +30,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       }
   };
 
+  const handlePlaatsbeschrijvingen = () => {
+          navigation.navigate('Plaatsbeschrijving');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -38,12 +42,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       <View style={styles.bodyHigher}>
       <Text style={[styles.nameButtonText, { fontWeight: 'bold', fontSize: 20, marginBottom: 15 }]}>Selecteer werknemers</Text>
         {['Henk', 'Adri','Sébastiaan', 'Tuur'].map((name, index) => (
-          <TouchableOpacity 
-            key={index} 
+          <TouchableOpacity
+            key={index}
             style={[
-              styles.nameButton, 
+              styles.nameButton,
               selectedNames.includes(name) && styles.nameButtonSelected
-            ]} 
+            ]}
             onPress={() => toggleNameSelection(name)}
           >
             <Text style={styles.nameButtonText}>{name}</Text>
@@ -52,11 +56,17 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity 
-          style={styles.footerButton} 
+        <TouchableOpacity
+          style={[styles.footerButton, {marginBottom: 10}]}
           onPress={handleNextPage}
         >
           <Text style={styles.startButton}>Start plaatsbeschrijving</Text>
+        </TouchableOpacity>
+         <TouchableOpacity
+          style={styles.footerButton}
+          onPress={handlePlaatsbeschrijvingen}
+        >
+          <Text style={styles.startButton}>Plaatsbeschrijving opvragen</Text>
         </TouchableOpacity>
       </View>
     </View>

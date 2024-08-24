@@ -16,11 +16,11 @@ export default function UnitTypeCheckboxForm({
 }: UnitTypeCheckboxFormProps) {
   const [open, setOpen] = useState(false);
   const [items] = useState([
-    { label: 'Studentenkot', value: 'studentenkot' },
-    { label: 'Studio', value: 'studio' },
-    { label: 'Appartement', value: 'appartement' },
-    { label: 'Huis', value: 'huis' },
-    { label: 'Garage', value: 'garage' },
+    { label: 'Studentenkot', value: 'Studentenkot' },
+    { label: 'Studio', value: 'Studio' },
+    { label: 'Appartement', value: 'Appartement' },
+    { label: 'Huis', value: 'Huis' },
+    { label: 'Garage', value: 'Garage' },
   ]);
 
   return (

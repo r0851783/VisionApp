@@ -84,15 +84,17 @@ export default function SamenvattingScreen({ navigation, route }: SamenvattingSc
                     {renderEdit('Datum Intrede', data.intredeDatum, 'intredeDatum')}
                     {renderEdit('Datum Uittrede', data.uittredeDatum, 'uittredeDatum')}
                     <View style={styles.line} />
-                    {renderEdit('Gegevens verhuurder', data.verhuurderNaam, 'verhuurderNaam')}
-                    {renderEdit('', data.verhuurderGeboortedatum, 'verhuurderGeboortedatum')}
-                    {renderEdit('', data.verhuurderTelefoonnummer, 'verhuurderTelefoonnummer')}
-                    {renderEdit('', data.verhuurderEmail, 'verhuurderEmail')}
+                    <Text style={[styles.label, styles.aquaTitle]}>Gegevens verhuurder</Text>
+                    {renderEdit('Naam', data.verhuurderNaam, 'verhuurderNaam')}
+                    {renderEdit('Geboortedatum', data.verhuurderGeboortedatum, 'verhuurderGeboortedatum')}
+                    {renderEdit('Telefoonnnummer', data.verhuurderTelefoonnummer, 'verhuurderTelefoonnummer')}
+                    {renderEdit('Email', data.verhuurderEmail, 'verhuurderEmail')}
                     <View style={styles.line} />
-                    {renderEdit('Gegevens huurder', data.huurderNaam, 'huurderNaam')}
-                    {renderEdit('', data.huurderGeboortedatum, 'huurderGeboortedatum')}
-                    {renderEdit('', data.huurderTelefoonnummer, 'huurderTelefoonnummer')}
-                    {renderEdit('', data.huurderEmail, 'huurderEmail')}
+                    <Text style={[styles.label, styles.aquaTitle]}>Gegevens huurder</Text>
+                    {renderEdit('Naam', data.huurderNaam, 'huurderNaam')}
+                    {renderEdit('Geboortedatum', data.huurderGeboortedatum, 'huurderGeboortedatum')}
+                    {renderEdit('Telefoonnummer', data.huurderTelefoonnummer, 'huurderTelefoonnummer')}
+                    {renderEdit('Email', data.huurderEmail, 'huurderEmail')}
                     <View style={styles.line} />
                     {renderEdit('Straat', data.straat, 'straat')}
                     {renderEdit('Huisnummer', data.huisnummer, 'huisnummer')}

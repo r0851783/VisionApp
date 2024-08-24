@@ -143,6 +143,13 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginVertical: 10,
   },
+  aquaTitle: {
+        color: '#8e9c3e',
+        marginLeft: 15,
+        marginRight: 20,
+        marginTop: 10,
+        marginBottom: 10,
+    },
   
   // Footer Styles
   footer: {

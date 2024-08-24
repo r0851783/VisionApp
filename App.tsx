@@ -14,6 +14,7 @@ import Opmerkingen from './src/screens/OpmerkingenScreen';
 import Samenvatting from './src/screens/SamenvattingScreen';
 import Handtekening from './src/screens/HandtekeningScreen';
 import Bevestiging from './src/screens/BevestigingScreen';
+import Plaatsbeschrijving from './src/screens/PlaatsbeschrijvingScreen';
 import { RootStackParamList } from './types';
 import { enableScreens } from 'react-native-screens';
 
@@ -26,6 +27,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Plaatsbeschrijving" component={Plaatsbeschrijving} options={{ headerShown: false }} />
         <Stack.Screen name="Selectie" component={SelectieScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Data" component={DataScreen} options={{ headerShown: false }} />
         <Stack.Screen name="PartijenVerhuurder" component={PartijenVerhuurderScreen} options={{ headerShown: false }} />

@@ -1,5 +1,6 @@
 export type RootStackParamList = {
   Home: undefined;
+  Plaatsbeschrijving: undefined;
   Selectie: { selectedNames: string[] };
   Data: { selectedOption: string, selectedNames: string[] };
   PartijenVerhuurder: { intredeDatum: string; uittredeDatum: string; selectedOption: string; selectedNames: string[] };
