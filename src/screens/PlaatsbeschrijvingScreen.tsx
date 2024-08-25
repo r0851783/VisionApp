@@ -60,10 +60,7 @@ export default function PlaatsbeschrijvingScreen({ navigation }: plaatsbeschrijv
     };
 
     const handleViewFotos = () => {
-        console.log('Navigating with imageUris:', plaatsbeschrijvingen[currentIndex].imageUris);
-        navigation.navigate('Fotos', {
-            imageUris: plaatsbeschrijvingen[currentIndex].imageUris || [],
-        });
+        navigation.navigate('Fotos');
     };
 
 

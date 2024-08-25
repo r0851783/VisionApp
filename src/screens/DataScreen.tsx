@@ -49,19 +49,19 @@ export default function DataScreen({ navigation, route }: DataScreenProps) {
       return false;
     }
 
+    if (!isValidDate(intredeDatum)) {
+      setErrorMessage('De intrede datum is niet in het juiste formaat (DD-MM-YYYY)');
+      return false;
+    }
+
     if (selectedOption === 'Uittrede') {
       if (!uittredeDatum) {
         setErrorMessage('Uittrede datum is verplicht.');
         return false;
       }
 
-      if (!isValidDate(intredeDatum)) {
-        setErrorMessage('De intrede datum is niet in het juiste formaat (DD-MM-YYYY).');
-        return false;
-      }
-
       if (!isValidDate(uittredeDatum)) {
-        setErrorMessage('De uittrede datum is ongeldig of niet in het juiste formaat (DD-MM-YYYY).');
+        setErrorMessage('De uittrede datum is niet in het juiste formaat (DD-MM-YYYY).');
         return false;
       }
 

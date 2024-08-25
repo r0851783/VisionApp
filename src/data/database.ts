@@ -28,7 +28,6 @@ export const getDBConnection = async (): Promise<SQLiteDatabase> => {
   });
 };
 
-
 export const createTable = async (db: SQLiteDatabase) => {
   const query = `CREATE TABLE IF NOT EXISTS ${tableName} (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,7 +49,7 @@ export const createTable = async (db: SQLiteDatabase) => {
                 postcode TEXT NULL,
                 stad TEXT NULL,
                 woningType TEXT NULL,
-                imageUris TEXT NULL,
+                imageUris TEXT NULL,  -- Changed to allow NULL
                 voordeur TEXT NULL,
                 garage TEXT NULL,
                 brievenbus TEXT NULL,
@@ -77,6 +76,13 @@ export const insertPlaatsbeschrijving = async (
   db: SQLiteDatabase,
   data: any
 ): Promise<void> => {
+  console.log('Inserting data: ', data);
+
+  if (!data.imageUris || data.imageUris.length === 0) {
+    console.warn('No image URIs provided, a placeholder will be saved.');
+    data.imageUris = [''];  // Ensuring it's an array with at least one empty string
+  }
+
   const insertQuery = `INSERT INTO ${tableName} (
     selectedNames, selectedOption, intredeDatum, uittredeDatum, verhuurderNaam, verhuurderGeboortedatum,
     verhuurderTelefoonnummer, verhuurderEmail, huurderNaam, huurderGeboortedatum, huurderTelefoonnummer,
@@ -93,6 +99,8 @@ export const insertPlaatsbeschrijving = async (
   };
 
   const currentTimestamp = formatDate(new Date());
+  const imageUrisString = Array.isArray(data.imageUris) ? data.imageUris.join(', ') : '';
+  console.log('imageUris being saved:', imageUrisString);
 
   try {
     await db.executeSql(insertQuery, [
@@ -114,7 +122,7 @@ export const insertPlaatsbeschrijving = async (
       data.postcode || '',
       data.stad || '',
       data.woningType || '',
-      Array.isArray(data.imageUris) ? data.imageUris.join(', ') : '',
+      imageUrisString || '',
       data.voordeur || '',
       data.garage || '',
       data.brievenbus || '',
@@ -128,22 +136,32 @@ export const insertPlaatsbeschrijving = async (
   }
 };
 
-
 export const getPlaatsbeschrijvingen = async (db: SQLiteDatabase): Promise<any[]> => {
   const selectQuery = `SELECT * FROM ${tableName}`;
-  const results = await db.executeSql(selectQuery);
+  try {
+    const results = await db.executeSql(selectQuery);
 
-  const plaatsbeschrijvingen: any[] = [];
-  results.forEach(result => {
-    for (let index = 0; index < result.rows.length; index++) {
-      const item = result.rows.item(index);
-      item.imageUris = item.imageUris 
-        ? item.imageUris.split(',').map((uri: string) => uri.trim()).filter((uri: string) => uri.length > 0)
-        : [];
-      plaatsbeschrijvingen.push(item);
-    }
-  });
-  return plaatsbeschrijvingen;
+    const plaatsbeschrijvingen: any[] = [];
+
+    results.forEach(result => {
+      const rows = result.rows;
+      for (let index = 0; index < rows.length; index++) {
+        const item = rows.item(index);
+        console.log('Fetched item:', item);
+
+        if (item && item.imageUris) {
+          item.imageUris = item.imageUris
+            ? item.imageUris.split(',').map((uri: string) => uri.trim()).filter((uri: string) => uri.length > 0)
+            : [];
+        }
+        plaatsbeschrijvingen.push(item);
+      }
+    });
+
+    console.log('Processed plaatsbeschrijvingen:', plaatsbeschrijvingen);
+    return plaatsbeschrijvingen;
+  } catch (error) {
+    console.error('Failed to fetch plaatsbeschrijvingen:', error);
+    throw new Error('Failed to fetch plaatsbeschrijvingen');
+  }
 };
-
-

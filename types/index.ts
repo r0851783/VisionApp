@@ -2,7 +2,7 @@ export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   Plaatsbeschrijving: undefined;
-  Fotos: { imageUris: string[] };
+  Fotos: undefined;
   Medewerker: undefined;
   Selectie: { selectedNames: string[] };
   Data: { selectedOption: string, selectedNames: string[] };

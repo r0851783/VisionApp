@@ -12,7 +12,6 @@ type OpmerkingenScreenProps = {
 
 export default function OpmerkingenScreen({ navigation, route }: OpmerkingenScreenProps) {
     const [text, setText] = useState('');
-    
     const handleNextPage = () => {
       navigation.navigate('Samenvatting', {
         ...route.params,
