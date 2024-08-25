@@ -79,10 +79,10 @@ export default function SamenvattingScreen({ navigation, route }: SamenvattingSc
                 <View style={styles.summaryContainer}>
                     {renderEdit('Werknemers', data.selectedNames.join(', '), 'selectedNames')}
                     <View style={styles.line} />
-                    {renderEdit('Type Plaatsbeschrijving', data.selectedOption, 'selectedOption')}
+                    {renderEdit('Type plaatsbeschrijving', data.selectedOption, 'selectedOption')}
                     <View style={styles.line} />
-                    {renderEdit('Datum Intrede', data.intredeDatum, 'intredeDatum')}
-                    {renderEdit('Datum Uittrede', data.uittredeDatum, 'uittredeDatum')}
+                    {renderEdit('Datum intrede', data.intredeDatum, 'intredeDatum')}
+                    {renderEdit('Datum uittrede', data.uittredeDatum, 'uittredeDatum')}
                     <View style={styles.line} />
                     <Text style={[styles.label, styles.aquaTitle]}>Gegevens verhuurder</Text>
                     {renderEdit('Naam', data.verhuurderNaam, 'verhuurderNaam')}

@@ -73,7 +73,7 @@ export default function HandtekeningScreen({ navigation, route }: HandtekeningSc
                 postcode,
                 stad,
                 woningType,
-                imageUris: imageUris ? imageUris.join(', ') : '',
+                imageUris,
                 voordeur,
                 garage,
                 brievenbus,

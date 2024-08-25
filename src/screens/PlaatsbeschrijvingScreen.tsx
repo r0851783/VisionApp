@@ -78,10 +78,10 @@ export default function PlaatsbeschrijvingScreen({ navigation }: plaatsbeschrijv
                 <View style={styles.summaryContainer}>
                     {renderEdit('Werknemers', plaatsbeschrijvingen[currentIndex].selectedNames)}
                     <View style={styles.line} />
-                    {renderEdit('Type Plaatsbeschrijving', plaatsbeschrijvingen[currentIndex].selectedOption)}
+                    {renderEdit('Type plaatsbeschrijving', plaatsbeschrijvingen[currentIndex].selectedOption)}
                     <View style={styles.line} />
-                    {renderEdit('Datum Intrede', plaatsbeschrijvingen[currentIndex].intredeDatum)}
-                    {renderEdit('Datum Uittrede', plaatsbeschrijvingen[currentIndex].uittredeDatum)}
+                    {renderEdit('Datum intrede', plaatsbeschrijvingen[currentIndex].intredeDatum)}
+                    {renderEdit('Datum uittrede', plaatsbeschrijvingen[currentIndex].uittredeDatum)}
                     <View style={styles.line} />
                     <Text style={[styles.label, styles.aquaTitle]}>Gegevens verhuurder</Text>
                     {renderEdit('Naam', plaatsbeschrijvingen[currentIndex].verhuurderNaam)}

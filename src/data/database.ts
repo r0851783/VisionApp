@@ -49,7 +49,7 @@ export const createTable = async (db: SQLiteDatabase) => {
                 postcode TEXT NULL,
                 stad TEXT NULL,
                 woningType TEXT NULL,
-                imageUris TEXT NULL,  -- Changed to allow NULL
+                imageUris TEXT NULL,
                 voordeur TEXT NULL,
                 garage TEXT NULL,
                 brievenbus TEXT NULL,
@@ -80,7 +80,7 @@ export const insertPlaatsbeschrijving = async (
 
   if (!data.imageUris || data.imageUris.length === 0) {
     console.warn('No image URIs provided, a placeholder will be saved.');
-    data.imageUris = [''];  // Ensuring it's an array with at least one empty string
+    data.imageUris = [''];
   }
 
   const insertQuery = `INSERT INTO ${tableName} (
@@ -99,8 +99,6 @@ export const insertPlaatsbeschrijving = async (
   };
 
   const currentTimestamp = formatDate(new Date());
-  const imageUrisString = Array.isArray(data.imageUris) ? data.imageUris.join(', ') : '';
-  console.log('imageUris being saved:', imageUrisString);
 
   try {
     await db.executeSql(insertQuery, [
@@ -122,7 +120,7 @@ export const insertPlaatsbeschrijving = async (
       data.postcode || '',
       data.stad || '',
       data.woningType || '',
-      imageUrisString || '',
+      Array.isArray(data.imageUris) ? data.selectedNames.join(', ') : '',
       data.voordeur || '',
       data.garage || '',
       data.brievenbus || '',
