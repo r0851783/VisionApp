@@ -73,12 +73,13 @@ export default function HandtekeningScreen({ navigation, route }: HandtekeningSc
                 postcode,
                 stad,
                 woningType,
-                imageUris,
+                imageUris: imageUris ? imageUris.join(', ') : '',
                 voordeur,
                 garage,
                 brievenbus,
                 text,
             };
+            console.log('Saving data with imageUris:', data.imageUris);
             await insertPlaatsbeschrijving(db, data);
             console.log('Data and signatures saved successfully');
             handleNextPage();

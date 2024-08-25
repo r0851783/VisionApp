@@ -130,7 +130,9 @@ export const getPlaatsbeschrijvingen = async (db: SQLiteDatabase): Promise<any[]
   results.forEach(result => {
     for (let index = 0; index < result.rows.length; index++) {
       const item = result.rows.item(index);
-      item.imageUris = item.imageUris ? item.imageUris.split(',').map((uri: string) => uri.trim()) : [];
+      item.imageUris = item.imageUris 
+        ? item.imageUris.split(',').map((uri: string) => uri.trim()).filter((uri: string) => uri.length > 0)
+        : [];
       plaatsbeschrijvingen.push(item);
     }
   });
