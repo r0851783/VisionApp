@@ -31,6 +31,7 @@ export default function SamenvattingScreen({ navigation, route }: SamenvattingSc
         postcode: route.params.postcode || '',
         stad: route.params.stad || '',
         woningType: route.params.woningType || '',
+        imageUris: route.params.imageUris || [],
         voordeur: route.params.voordeur || '',
         garage: route.params.garage || '',
         brievenbus: route.params.brievenbus || '',

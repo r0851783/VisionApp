@@ -47,7 +47,7 @@ export default function SleutelScreen({ navigation, route }: SleutelScreenProps)
         ...route.params,
         voordeur,
         garage,
-        brievenbus
+        brievenbus,
       });
     }
   };

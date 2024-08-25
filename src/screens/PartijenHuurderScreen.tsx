@@ -76,7 +76,7 @@ export default function PartijenHuurderScreen({ navigation, route }: PartijenScr
         huurderNaam,
         huurderGeboortedatum,
         huurderTelefoonnummer,
-        huurderEmail
+        huurderEmail,
       });
     }
   };

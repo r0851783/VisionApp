@@ -12,9 +12,13 @@ export const getDBConnection = async (): Promise<SQLiteDatabase> => {
         location: 'default',
       },
       () => {
-        console.log('Database connection established');
-         console.log('Database file path:', db);
-        resolve(db);
+        if (db) {
+          console.log('Database connection established');
+          console.log('Database file path:', db);
+          resolve(db);
+        } else {
+          reject(new Error('Database connection failed'));
+        }
       },
       error => {
         console.error('Error opening database:', error);
@@ -23,6 +27,7 @@ export const getDBConnection = async (): Promise<SQLiteDatabase> => {
     );
   });
 };
+
 
 export const createTable = async (db: SQLiteDatabase) => {
   const query = `CREATE TABLE IF NOT EXISTS ${tableName} (
@@ -73,9 +78,9 @@ export const insertPlaatsbeschrijving = async (
   data: any
 ): Promise<void> => {
   const insertQuery = `INSERT INTO ${tableName} (
-      selectedNames, selectedOption, intredeDatum, uittredeDatum, verhuurderNaam, verhuurderGeboortedatum,
-      verhuurderTelefoonnummer, verhuurderEmail, huurderNaam, huurderGeboortedatum, huurderTelefoonnummer,
-      huurderEmail, straat, huisnummer, busnummer, postcode, stad, woningType, imageUris, voordeur, garage, brievenbus, text, created_at
+    selectedNames, selectedOption, intredeDatum, uittredeDatum, verhuurderNaam, verhuurderGeboortedatum,
+    verhuurderTelefoonnummer, verhuurderEmail, huurderNaam, huurderGeboortedatum, huurderTelefoonnummer,
+    huurderEmail, straat, huisnummer, busnummer, postcode, stad, woningType, imageUris, voordeur, garage, brievenbus, text, created_at
   ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const formatDate = (date: Date): string => {
@@ -91,36 +96,38 @@ export const insertPlaatsbeschrijving = async (
 
   try {
     await db.executeSql(insertQuery, [
-      data.selectedNames.join(', '),
-      data.selectedOption,
-      data.intredeDatum,
-      data.uittredeDatum,
-      data.verhuurderNaam,
-      data.verhuurderGeboortedatum,
-      data.verhuurderTelefoonnummer,
-      data.verhuurderEmail,
-      data.huurderNaam,
-      data.huurderGeboortedatum,
-      data.huurderTelefoonnummer,
-      data.huurderEmail,
-      data.straat,
-      data.huisnummer,
-      data.busnummer,
-      data.postcode,
-      data.stad,
-      data.woningType,
-      data.imageUris ? data.imageUris.join(', ') : '',
-      data.voordeur,
-      data.garage,
-      data.brievenbus,
-      data.text,
+      Array.isArray(data.selectedNames) ? data.selectedNames.join(', ') : '',
+      data.selectedOption || '',
+      data.intredeDatum || '',
+      data.uittredeDatum || '',
+      data.verhuurderNaam || '',
+      data.verhuurderGeboortedatum || '',
+      data.verhuurderTelefoonnummer || '',
+      data.verhuurderEmail || '',
+      data.huurderNaam || '',
+      data.huurderGeboortedatum || '',
+      data.huurderTelefoonnummer || '',
+      data.huurderEmail || '',
+      data.straat || '',
+      data.huisnummer || '',
+      data.busnummer || '',
+      data.postcode || '',
+      data.stad || '',
+      data.woningType || '',
+      Array.isArray(data.imageUris) ? data.imageUris.join(', ') : '',
+      data.voordeur || '',
+      data.garage || '',
+      data.brievenbus || '',
+      data.text || '',
       currentTimestamp,
     ]);
+    console.log('Data inserted successfully');
   } catch (error) {
     console.error('Error executing insert query:', error);
     throw error;
   }
 };
+
 
 export const getPlaatsbeschrijvingen = async (db: SQLiteDatabase): Promise<any[]> => {
   const selectQuery = `SELECT * FROM ${tableName}`;

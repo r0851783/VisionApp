@@ -110,7 +110,7 @@ export default function PartijenVerhuurderScreen({ navigation, route }: Partijen
       <View style={styles.footer}>
         <View style={styles.footerButtonContainer}>
           <TouchableOpacity
-            style={styles.footerButtonSmall} 
+            style={styles.footerButtonSmall}
             onPress={() => navigation.goBack()}
           >
             <Text style={styles.startButton}>Vorige pagina</Text>
