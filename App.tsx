@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
+import MedewerkerScreen from './src/screens/MedewerkerScreen';
 import SelectieScreen from './src/screens/SelectieScreen';
 import DataScreen from './src/screens/DataScreen';
 import PartijenVerhuurderScreen from './src/screens/PartijenVerhuurderScreen';
@@ -15,6 +16,7 @@ import Samenvatting from './src/screens/SamenvattingScreen';
 import Handtekening from './src/screens/HandtekeningScreen';
 import Bevestiging from './src/screens/BevestigingScreen';
 import Plaatsbeschrijving from './src/screens/PlaatsbeschrijvingScreen';
+import Fotos from './src/screens/FotoScreen';
 import { RootStackParamList } from './types';
 import { enableScreens } from 'react-native-screens';
 
@@ -27,7 +29,9 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Medewerker" component={MedewerkerScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Plaatsbeschrijving" component={Plaatsbeschrijving} options={{ headerShown: false }} />
+        <Stack.Screen name="Fotos" component={Fotos} options={{ headerShown: false }} />
         <Stack.Screen name="Selectie" component={SelectieScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Data" component={DataScreen} options={{ headerShown: false }} />
         <Stack.Screen name="PartijenVerhuurder" component={PartijenVerhuurderScreen} options={{ headerShown: false }} />

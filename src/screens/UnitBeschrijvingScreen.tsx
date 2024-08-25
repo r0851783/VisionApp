@@ -17,7 +17,6 @@ export default function UnitBeschrijving({ navigation, route }: UnitBeschrijving
   const [busnummer, setBusnummer] = useState('');
   const [postcode, setPostcode] = useState('');
   const [stad, setStad] = useState('');
-
   const [straatError, setStraatError] = useState('');
   const [huisnummerError, setHuisnummerError] = useState('');
   const [postcodeError, setPostcodeError] = useState('');
@@ -74,8 +73,7 @@ export default function UnitBeschrijving({ navigation, route }: UnitBeschrijving
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Vision</Text>
-      </View>        
-        
+      </View>
       <UnitBeschrijvingForm
         straat={straat}
         setStraat={setStraat}
@@ -95,14 +93,14 @@ export default function UnitBeschrijving({ navigation, route }: UnitBeschrijving
 
       <View style={styles.footer}>
         <View style={styles.footerButtonContainer}>
-          <TouchableOpacity 
-            style={styles.footerButtonSmall} 
+          <TouchableOpacity
+            style={styles.footerButtonSmall}
             onPress={() => navigation.goBack()}
           >
             <Text style={styles.startButton}>Vorige pagina</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.footerButtonSmall} 
+          <TouchableOpacity
+            style={styles.footerButtonSmall}
             onPress={handleNextPage}
           >
             <Text style={styles.startButton}>Volgende pagina</Text>

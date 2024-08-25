@@ -34,12 +34,11 @@ export default function SamenvattingScreen({ navigation, route }: SamenvattingSc
         voordeur: route.params.voordeur || '',
         garage: route.params.garage || '',
         brievenbus: route.params.brievenbus || '',
-        text: route.params.text || ''
-
+        text: route.params.text || '',
     });
 
     const handleNextPage = () => {
-      navigation.navigate('Handtekening', data)
+      navigation.navigate('Handtekening', data);
     };
 
     const toggleEditMode = () => {

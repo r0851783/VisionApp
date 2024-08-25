@@ -16,7 +16,6 @@ export default function PartijenHuurderScreen({ navigation, route }: PartijenScr
   const [huurderGeboortedatum, setHuurderGeboortedatum] = useState('');
   const [huurderTelefoonnummer, setHuurderTelefoonnummer] = useState('');
   const [huurderEmail, setHuurderEmail] = useState('');
-  
   const [huurderNaamError, setHuurderNaamError] = useState('');
   const [huurderGeboortedatumError, setHuurderGeboortedatumError] = useState('');
   const [huurderTelefoonnummerError, setHuurderTelefoonnummerError] = useState('');
@@ -24,7 +23,7 @@ export default function PartijenHuurderScreen({ navigation, route }: PartijenScr
 
   const isValidDate = (dateString: string) => {
     const regex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
-    if (!regex.test(dateString)) return false;
+    if (!regex.test(dateString)) {return false;}
 
     const [day, month, year] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day);
@@ -105,14 +104,14 @@ export default function PartijenHuurderScreen({ navigation, route }: PartijenScr
 
       <View style={styles.footer}>
         <View style={styles.footerButtonContainer}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.footerButtonSmall} 
             onPress={() => navigation.goBack()}
           >
             <Text style={styles.startButton}>Vorige pagina</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.footerButtonSmall} 
+          <TouchableOpacity
+            style={styles.footerButtonSmall}
             onPress={handleNextPage}
           >
             <Text style={styles.startButton}>Volgende pagina</Text>

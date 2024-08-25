@@ -16,7 +16,7 @@ export default function OpmerkingenScreen({ navigation, route }: OpmerkingenScre
     const handleNextPage = () => {
       navigation.navigate('Samenvatting', {
         ...route.params,
-        text
+        text,
       });
     };
 
@@ -41,14 +41,14 @@ export default function OpmerkingenScreen({ navigation, route }: OpmerkingenScre
             </TouchableWithoutFeedback>
             <View style={styles.footer}>
                 <View style={styles.footerButtonContainer}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.footerButtonSmall} 
                     onPress={() => navigation.goBack()}
                 >
                     <Text style={styles.startButton}>Vorige pagina</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                    style={styles.footerButtonSmall} 
+                <TouchableOpacity
+                    style={styles.footerButtonSmall}
                     onPress={handleNextPage}
                 >
                     <Text style={styles.startButton}>Volgende pagina</Text>

@@ -21,15 +21,15 @@ export default function BevestigingScreen({ navigation}: BevestigingScreenProps)
                 <Text style={styles.nameButtonText}>
                     De plaatsbeschrijving is succesvol ingestuurd!
                 </Text>
-                <Image 
+                <Image
                     source={require('../../assets/succesvol.png')}
                     style={{ width: 100, height: 100, marginTop: 30 }}
                     resizeMode="contain"
                 />
             </View>
             <View style={styles.footer}>
-                <TouchableOpacity 
-                    style={styles.footerButtonSmall} 
+                <TouchableOpacity
+                    style={styles.footerButtonSmall}
                     onPress={() => navigation.navigate('Home')}
                 >
                     <Text style={styles.startButton}>Terug naar Home</Text>

@@ -32,6 +32,7 @@ export default function HandtekeningScreen({ navigation, route }: HandtekeningSc
         postcode,
         stad,
         woningType,
+        imageUris,
         voordeur,
         garage,
         brievenbus,
@@ -50,41 +51,41 @@ export default function HandtekeningScreen({ navigation, route }: HandtekeningSc
     };
 
     const handleSaveData = async () => {
-    try {
-        const db = await getDBConnection();
-        await createTable(db);
-        const data = {
-            selectedNames,
-            selectedOption,
-            intredeDatum,
-            uittredeDatum,
-            verhuurderNaam,
-            verhuurderGeboortedatum,
-            verhuurderTelefoonnummer,
-            verhuurderEmail,
-            huurderNaam,
-            huurderGeboortedatum,
-            huurderTelefoonnummer,
-            huurderEmail,
-            straat,
-            huisnummer,
-            busnummer,
-            postcode,
-            stad,
-            woningType,
-            voordeur,
-            garage,
-            brievenbus,
-            text,
-        };
-        await insertPlaatsbeschrijving(db, data);
-        console.log('Data and signatures saved successfully');
-        handleNextPage();
-    } catch (error) {
-        console.error('Failed to save data', error);
-    }
-};
-
+        try {
+            const db = await getDBConnection();
+            await createTable(db);
+            const data = {
+                selectedNames,
+                selectedOption,
+                intredeDatum,
+                uittredeDatum,
+                verhuurderNaam,
+                verhuurderGeboortedatum,
+                verhuurderTelefoonnummer,
+                verhuurderEmail,
+                huurderNaam,
+                huurderGeboortedatum,
+                huurderTelefoonnummer,
+                huurderEmail,
+                straat,
+                huisnummer,
+                busnummer,
+                postcode,
+                stad,
+                woningType,
+                imageUris,
+                voordeur,
+                garage,
+                brievenbus,
+                text,
+            };
+            await insertPlaatsbeschrijving(db, data);
+            console.log('Data and signatures saved successfully');
+            handleNextPage();
+        } catch (error) {
+            console.error('Failed to save data', error);
+        }
+    };
 
     const handleNextPage = () => {
         navigation.navigate('Bevestiging', {

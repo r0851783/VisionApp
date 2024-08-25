@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { styles } from '../styles/GlobalStyles';
-import { useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
 
@@ -10,28 +9,12 @@ type HomeScreenProps = {
 };
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
-  const [selectedNames, setSelectedNames] = useState<string[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-
-  const toggleNameSelection = (name: string) => {
-    if (selectedNames.includes(name)) {
-      setSelectedNames(selectedNames.filter(selectedName => selectedName !== name));
-    } else {
-      setSelectedNames([...selectedNames, name]);
-    }
-    setErrorMessage('');
-  };
-
   const handleNextPage = () => {
-      if (selectedNames.length === 0) {
-          setErrorMessage('Selecteer minstens één werknemer.');
-      } else {
-          navigation.navigate('Selectie', { selectedNames });
-      }
+          navigation.navigate('Medewerker');
   };
 
-  const handlePlaatsbeschrijvingen = () => {
-          navigation.navigate('Plaatsbeschrijving');
+  const handlePlaatsbeschrijvingen = async () => {
+    navigation.navigate('Plaatsbeschrijving');
   };
 
   return (
@@ -40,20 +23,11 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         <Text style={styles.title}>Vision</Text>
       </View>
       <View style={styles.bodyHigher}>
-      <Text style={[styles.nameButtonText, { fontWeight: 'bold', fontSize: 20, marginBottom: 15 }]}>Selecteer werknemers</Text>
-        {['Henk', 'Adri','Sébastiaan', 'Tuur'].map((name, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[
-              styles.nameButton,
-              selectedNames.includes(name) && styles.nameButtonSelected
-            ]}
-            onPress={() => toggleNameSelection(name)}
-          >
-            <Text style={styles.nameButtonText}>{name}</Text>
-          </TouchableOpacity>
-        ))}
-        {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+        <Text style={[styles.nameButtonText, { fontWeight: 'bold', fontSize: 20, marginBottom: 15 }]}>Welkom op de plaatsbeschrijving!</Text>
+        <Image
+          source={require('../../assets/logo.png')}
+          style={{ width: 300, height: 300}}
+        />
       </View>
       <View style={styles.footer}>
         <TouchableOpacity
@@ -62,11 +36,11 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         >
           <Text style={styles.startButton}>Start plaatsbeschrijving</Text>
         </TouchableOpacity>
-         <TouchableOpacity
-          style={styles.footerButton}
+        <TouchableOpacity
+          style={[styles.footerButton, {marginBottom: 10}]}
           onPress={handlePlaatsbeschrijvingen}
         >
-          <Text style={styles.startButton}>Plaatsbeschrijving opvragen</Text>
+          <Text style={styles.startButton}>Plaatsbeschrijvingen opvragen</Text>
         </TouchableOpacity>
       </View>
     </View>

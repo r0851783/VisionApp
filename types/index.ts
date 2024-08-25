@@ -1,6 +1,8 @@
 export type RootStackParamList = {
   Home: undefined;
   Plaatsbeschrijving: undefined;
+  Fotos: { imageUris: string[] };
+  Medewerker: undefined;
   Selectie: { selectedNames: string[] };
   Data: { selectedOption: string, selectedNames: string[] };
   PartijenVerhuurder: { intredeDatum: string; uittredeDatum: string; selectedOption: string; selectedNames: string[] };
@@ -86,6 +88,7 @@ export type RootStackParamList = {
     postcode: string;
     stad: string;
     woningType: string;
+    imageUris: string[];
   };
   Opmerkingen: {
     selectedNames: string[];
@@ -106,6 +109,7 @@ export type RootStackParamList = {
     postcode: string;
     stad: string;
     woningType: string;
+    imageUris: string[];
     voordeur: string;
     garage: string;
     brievenbus: string;
@@ -129,6 +133,7 @@ export type RootStackParamList = {
     postcode: string;
     stad: string;
     woningType: string;
+    imageUris: string[];
     voordeur: string;
     garage: string;
     brievenbus: string;
@@ -153,6 +158,7 @@ export type RootStackParamList = {
     postcode: string;
     stad: string;
     woningType: string;
+    imageUris: string[];
     voordeur: string;
     garage: string;
     brievenbus: string;
@@ -177,6 +183,7 @@ export type RootStackParamList = {
     postcode: string;
     stad: string;
     woningType: string;
+    imageUris: string[];
     voordeur: string;
     garage: string;
     brievenbus: string;

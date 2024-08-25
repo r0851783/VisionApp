@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Button } from 'react-native';
 import { styles } from '../styles/GlobalStyles';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
@@ -33,7 +33,7 @@ export default function PlaatsbeschrijvingScreen({ navigation }: plaatsbeschrijv
             setCurrentIndex(currentIndex + 1);
             setTimeout(() => {
                 scrollViewRef.current?.scrollTo({ y: 0, animated: true });
-            }, 0); // Voeg een kleine vertraging toe
+            }, 0);
         }
     };
 
@@ -42,7 +42,7 @@ export default function PlaatsbeschrijvingScreen({ navigation }: plaatsbeschrijv
             setCurrentIndex(currentIndex - 1);
             setTimeout(() => {
                 scrollViewRef.current?.scrollTo({ y: 0, animated: true });
-            }, 0); // Voeg een kleine vertraging toe
+            }, 0);
         }
     };
 
@@ -54,20 +54,28 @@ export default function PlaatsbeschrijvingScreen({ navigation }: plaatsbeschrijv
         return (
             <View style={[styles.labelContainer, {marginLeft: 15, marginRight: 20}]}>
                 <Text style={styles.label}>{label}</Text>
-                <Text style={styles.textInput}>{value}</Text>
+                <Text style={styles.textInput}>{value || '/'}</Text>
             </View>
         );
     };
+
+    const handleViewFotos = () => {
+        console.log('Navigating with imageUris:', plaatsbeschrijvingen[currentIndex].imageUris);
+        navigation.navigate('Fotos', {
+            imageUris: plaatsbeschrijvingen[currentIndex].imageUris || [],
+        });
+    };
+
 
     return (
         <View style={styles.container}>
             <View style={styles.headerContainerSamenvatting}>
                 <Text style={[styles.title, {top: 30}]}>Vision</Text>
             </View>
-            <ScrollView 
-                contentContainerStyle={styles.contentContainerSamenvatting} 
+            <ScrollView
+                contentContainerStyle={styles.contentContainerSamenvatting}
                 style={{ flex: 1 }}
-                ref={scrollViewRef} // Ref toevoegen aan ScrollView
+                ref={scrollViewRef}
             >
                 {plaatsbeschrijvingen.length > 0 ? (
                 <View style={styles.summaryContainer}>
@@ -103,9 +111,12 @@ export default function PlaatsbeschrijvingScreen({ navigation }: plaatsbeschrijv
                     {renderEdit('Garage sleutels', plaatsbeschrijvingen[currentIndex].garage)}
                     <View style={styles.line} />
                     {renderEdit('Opmerkingen', plaatsbeschrijvingen[currentIndex].text)}
+                    <View style={styles.line} />
+                    {renderEdit('Aangemaakt op', plaatsbeschrijvingen[currentIndex].created_at)}
+                    <Button title="Zie foto's" onPress={handleViewFotos} />
                 </View>
                 ) : (
-                <Text style={styles.errorText}>Geen plaatsbeschrijvingen gevonden</Text>
+                <Text style={[styles.errorText, {marginBottom: 20}]}>Geen plaatsbeschrijvingen gevonden</Text>
                 )}
                 <View style={[styles.footerButtonContainer, {width: '90%', paddingBottom: 20}]}>
                     <TouchableOpacity
@@ -133,3 +144,4 @@ export default function PlaatsbeschrijvingScreen({ navigation }: plaatsbeschrijv
         </View>
     );
 }
+

@@ -88,14 +88,14 @@ export default function SleutelScreen({ navigation, route }: SleutelScreenProps)
       </View>
       <View style={styles.footer}>
         <View style={styles.footerButtonContainer}>
-          <TouchableOpacity 
-            style={styles.footerButtonSmall} 
+          <TouchableOpacity
+            style={styles.footerButtonSmall}
             onPress={() => navigation.goBack()}
           >
             <Text style={styles.startButton}>Vorige pagina</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.footerButtonSmall} 
+          <TouchableOpacity
+            style={styles.footerButtonSmall}
             onPress={handleNextPage}
           >
             <Text style={styles.startButton}>Volgende pagina</Text>

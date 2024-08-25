@@ -47,7 +47,13 @@
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false />
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Deze app heeft toegang nodig tot je fotobibliotheek om foto's te kunnen selecteren
+			en weergeven.</string>
+		<key>NSPhotoLibraryAddUsageDescription</key>
+		<string>Deze app heeft toegang nodig om foto's op te slaan in je fotobibliotheek.</string>
 		<key>NSCameraUsageDescription</key>
-		<string>Geef toegang tot de camera om foto's van de huidige toestand toe te voegen </string>
+		<string>Deze app heeft toegang nodig tot de camera om foto's te maken.</string>
+
 	</dict>
 </plist>

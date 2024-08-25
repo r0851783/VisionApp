@@ -45,10 +45,12 @@ export const createTable = async (db: SQLiteDatabase) => {
                 postcode TEXT NULL,
                 stad TEXT NULL,
                 woningType TEXT NULL,
+                imageUris TEXT NULL,
                 voordeur TEXT NULL,
                 garage TEXT NULL,
                 brievenbus TEXT NULL,
-                text TEXT NULL
+                text TEXT NULL,
+                created_at TEXT NOT NULL
             );`;
 
   try {
@@ -73,33 +75,51 @@ export const insertPlaatsbeschrijving = async (
   const insertQuery = `INSERT INTO ${tableName} (
       selectedNames, selectedOption, intredeDatum, uittredeDatum, verhuurderNaam, verhuurderGeboortedatum,
       verhuurderTelefoonnummer, verhuurderEmail, huurderNaam, huurderGeboortedatum, huurderTelefoonnummer,
-      huurderEmail, straat, huisnummer, busnummer, postcode, stad, woningType, voordeur, garage, brievenbus, text
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      huurderEmail, straat, huisnummer, busnummer, postcode, stad, woningType, imageUris, voordeur, garage, brievenbus, text, created_at
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  await db.executeSql(insertQuery, [
-    data.selectedNames.join(', '),
-    data.selectedOption,
-    data.intredeDatum,
-    data.uittredeDatum,
-    data.verhuurderNaam,
-    data.verhuurderGeboortedatum,
-    data.verhuurderTelefoonnummer,
-    data.verhuurderEmail,
-    data.huurderNaam,
-    data.huurderGeboortedatum,
-    data.huurderTelefoonnummer,
-    data.huurderEmail,
-    data.straat,
-    data.huisnummer,
-    data.busnummer,
-    data.postcode,
-    data.stad,
-    data.woningType,
-    data.voordeur,
-    data.garage,
-    data.brievenbus,
-    data.text,
-  ]);
+  const formatDate = (date: Date): string => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
+  };
+
+  const currentTimestamp = formatDate(new Date());
+
+  try {
+    await db.executeSql(insertQuery, [
+      data.selectedNames.join(', '),
+      data.selectedOption,
+      data.intredeDatum,
+      data.uittredeDatum,
+      data.verhuurderNaam,
+      data.verhuurderGeboortedatum,
+      data.verhuurderTelefoonnummer,
+      data.verhuurderEmail,
+      data.huurderNaam,
+      data.huurderGeboortedatum,
+      data.huurderTelefoonnummer,
+      data.huurderEmail,
+      data.straat,
+      data.huisnummer,
+      data.busnummer,
+      data.postcode,
+      data.stad,
+      data.woningType,
+      data.imageUris ? data.imageUris.join(', ') : '',
+      data.voordeur,
+      data.garage,
+      data.brievenbus,
+      data.text,
+      currentTimestamp,
+    ]);
+  } catch (error) {
+    console.error('Error executing insert query:', error);
+    throw error;
+  }
 };
 
 export const getPlaatsbeschrijvingen = async (db: SQLiteDatabase): Promise<any[]> => {
@@ -109,8 +129,12 @@ export const getPlaatsbeschrijvingen = async (db: SQLiteDatabase): Promise<any[]
   const plaatsbeschrijvingen: any[] = [];
   results.forEach(result => {
     for (let index = 0; index < result.rows.length; index++) {
-      plaatsbeschrijvingen.push(result.rows.item(index));
+      const item = result.rows.item(index);
+      item.imageUris = item.imageUris ? item.imageUris.split(',').map((uri: string) => uri.trim()) : [];
+      plaatsbeschrijvingen.push(item);
     }
   });
   return plaatsbeschrijvingen;
 };
+
+
